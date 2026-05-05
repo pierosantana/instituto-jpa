@@ -33,7 +33,7 @@ public class Curso {
     @ToString.Include
     private String nombre;
 
-    @OneToMany(mappedBy = "cursoId")
+    @OneToMany(mappedBy = "curso")
     private List<Matricula> matriculas;
 
 }
