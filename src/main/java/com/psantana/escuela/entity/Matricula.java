@@ -8,28 +8,38 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "matriculas")
-@Data
+@Getter
+@Setter
+@ToString(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class Matricula {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @EqualsAndHashCode.Include
+    @ToString.Include
     private String id;
 
-    private String name;
+    @ToString.Include
+    private String nombre;
 
+    //hace refeerenca a la columna de la tabla matricula en ambos casos
     @ManyToOne
     @JoinColumn(name = "curso_id")
-    private Curso cursoId;
+    private Curso curso;
 
     @ManyToOne
     @JoinColumn(name = "alumno_id")
-    private Alumno alumnoId;
+    private Alumno alumno;
     
 }
