@@ -2,6 +2,8 @@ package com.psantana.escuela.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,7 +23,6 @@ import lombok.ToString;
 @Setter
 @ToString(onlyExplicitlyIncluded = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@AllArgsConstructor
 @NoArgsConstructor
 public class Alumno {
 
@@ -34,6 +35,7 @@ public class Alumno {
     @ToString.Include
     private String nombre;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "alumno")
     private List<Matricula> matriculas;
 

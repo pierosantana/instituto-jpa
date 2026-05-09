@@ -10,37 +10,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.psantana.escuela.entity.Curso;
-import com.psantana.escuela.service.CursoService;
+import com.psantana.escuela.entity.Matricula;
+import com.psantana.escuela.service.MatriculaService;
 
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/cursos")
+@RequestMapping("/matriculas")
 @AllArgsConstructor
-public class CursoController {
+public class MatriculaController {
 
-    private final CursoService cursoService;
-
+    private final MatriculaService matriculaService;
+    
     @GetMapping
-    public List<Curso> getCursos() {
-        return cursoService.getAll();
+    public List<Matricula> getMatriculas() {
+        return matriculaService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Curso getCursoById(@PathVariable("id") String id) {
-        return cursoService.findById(id);
-    
+    public Matricula getMatricula(@PathVariable String id) {
+        return matriculaService.findById(id);
     }
-
+    
     @PostMapping
-    public void saveCurso(@RequestBody Curso curso) {
-        cursoService.save(curso);
+    public void saveMatricula(@RequestBody Matricula matricula) {
+        matriculaService.save(matricula);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCurso(@PathVariable("id") String id) {
-        cursoService.deleteById(id);
+    public void deleteMatricula(@PathVariable String id) {
+        matriculaService.deleteById(id);
     }
 
 }
