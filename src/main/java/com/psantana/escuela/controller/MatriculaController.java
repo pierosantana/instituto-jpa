@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.psantana.escuela.dto.MatriculaDTO;
 import com.psantana.escuela.entity.Matricula;
+import com.psantana.escuela.mapper.MatriculaMapper;
 import com.psantana.escuela.service.MatriculaService;
 
 import lombok.AllArgsConstructor;
@@ -21,15 +23,18 @@ import lombok.AllArgsConstructor;
 public class MatriculaController {
 
     private final MatriculaService matriculaService;
+    private final MatriculaMapper matriculaMapper;
     
     @GetMapping
-    public List<Matricula> getMatriculas() {
-        return matriculaService.getAll();
+    public List<MatriculaDTO> getMatriculas() {
+        return matriculaService.getAll().stream()
+            .map(matriculaMapper::toDTO)
+            .toList();
     }
 
     @GetMapping("/{id}")
-    public Matricula getMatricula(@PathVariable("id") String id) {
-        return matriculaService.findById(id);
+    public MatriculaDTO getMatricula(@PathVariable("id") String id) {
+        return matriculaMapper.toDTO(matriculaService.findById(id));
     }
     
     @PostMapping
