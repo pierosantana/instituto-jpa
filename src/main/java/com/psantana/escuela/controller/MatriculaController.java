@@ -28,7 +28,7 @@ public class MatriculaController {
     }
 
     @GetMapping("/{id}")
-    public Matricula getMatricula(@PathVariable String id) {
+    public Matricula getMatricula(@PathVariable("id") String id) {
         return matriculaService.findById(id);
     }
     
@@ -38,7 +38,7 @@ public class MatriculaController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteMatricula(@PathVariable String id) {
+    public void deleteMatricula(@PathVariable("id") String id) {
         matriculaService.deleteById(id);
     }
 

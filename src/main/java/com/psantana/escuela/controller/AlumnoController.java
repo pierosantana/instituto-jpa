@@ -29,12 +29,12 @@ public class AlumnoController {
     }
 
     @GetMapping("/{id}")
-    public Alumno getAlumno(@PathVariable String id) {
+    public Alumno getAlumno(@PathVariable("id") String id) {
         return alumnoService.findById(id);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteAlumno(@PathVariable String id) {
+    public void deleteAlumno(@PathVariable("id") String id) {
         alumnoService.deleteById(id);
     }
 
