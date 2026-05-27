@@ -8,7 +8,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +20,6 @@ import lombok.ToString;
 @Setter
 @ToString(onlyExplicitlyIncluded = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@AllArgsConstructor
 @NoArgsConstructor
 public class Matricula {
 
@@ -37,12 +35,10 @@ public class Matricula {
     //hace refeerenca a la columna de la tabla matricula en ambos casos
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "curso_id")
-  
     private Curso curso;
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "alumno_id")
-    
     private Alumno alumno;
 
     //metodos del negocio una matricula puede incluir alumno
@@ -59,5 +55,16 @@ public class Matricula {
             this.alumno = null;
         }
     }
+
+    public Matricula(String id, String nombre, Curso curso, Alumno alumno) {
+        this.id = id;
+        this.nombre = nombre;
+        this.curso = curso;
+        this.alumno = alumno;
+    }
+
+
+    
+    
 
 }

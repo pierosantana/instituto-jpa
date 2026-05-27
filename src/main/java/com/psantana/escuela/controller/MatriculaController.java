@@ -2,6 +2,7 @@ package com.psantana.escuela.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,18 +34,22 @@ public class MatriculaController {
     }
 
     @GetMapping("/{id}")
-    public MatriculaDTO getMatricula(@PathVariable("id") String id) {
-        return matriculaMapper.toDTO(matriculaService.findById(id));
+    public ResponseEntity<MatriculaDTO> getMatricula(@PathVariable("id") String id) {
+        Matricula matricula = matriculaService.findById(id);
+        if (matricula == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(matriculaMapper.toDTO(matricula));
     }
-    
+
     @PostMapping
-    public void saveMatricula(@RequestBody Matricula matricula) {
-        matriculaService.save(matricula);
+    public ResponseEntity<Void> saveMatricula(@RequestBody MatriculaDTO matriculaDTO) {
+        matriculaService.save(matriculaMapper.toEntity(matriculaDTO));
+        return ResponseEntity.status(201).build();
     }
 
     @DeleteMapping("/{id}")
-    public void deleteMatricula(@PathVariable("id") String id) {
+    public ResponseEntity<Void> deleteMatricula(@PathVariable("id") String id) {
         matriculaService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

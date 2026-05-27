@@ -21,7 +21,7 @@ public class MatriculaService {
     }
 
     public Matricula findById(String id){
-        return matriculaRepository.findById(id).orElse(null);
+        return matriculaRepository.findById(id).orElseThrow(() -> new RuntimeException("Matrícula no encontrada"));
     }
 
     public List<Matricula> getAll(){

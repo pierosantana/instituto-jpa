@@ -1,5 +1,12 @@
 package com.psantana.escuela.dto;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class MatriculaDTO {
 
     private String id;
@@ -7,45 +14,20 @@ public class MatriculaDTO {
     private String cursoId;
     private String alumnoId;
 
-    public MatriculaDTO() {
-    }
+    
 
-    public MatriculaDTO(String id, String nombre, String cursoId, String alumnoId) {
-        this.id = id;
+    public MatriculaDTO(String nombre, String cursoId, String alumnoId) {
         this.nombre = nombre;
         this.cursoId = cursoId;
         this.alumnoId = alumnoId;
     }
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
+
+    public MatriculaDTO(String id, String nombre, String cursoId, String alumnoId) {
         this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getCursoId() {
-        return cursoId;
-    }
-
-    public void setCursoId(String cursoId) {
         this.cursoId = cursoId;
-    }
-
-    public String getAlumnoId() {
-        return alumnoId;
-    }
-
-    public void setAlumnoId(String alumnoId) {
         this.alumnoId = alumnoId;
     }
 

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.psantana.escuela.entity.Alumno;
+import com.psantana.escuela.entity.Curso;
 import com.psantana.escuela.repository.AlumnoRepository;
 
 import lombok.AllArgsConstructor;
@@ -21,7 +22,7 @@ public class AlumnoService {
     }
 
     public Alumno findById(String id){
-        return alumnoRepository.findById(id).orElse(null);
+        return alumnoRepository.findById(id).orElseThrow(() -> new RuntimeException("Alumno no encontrado"));
     }
 
     public List<Alumno> getAll(){
@@ -32,6 +33,9 @@ public class AlumnoService {
         alumnoRepository.deleteById(id);
     }
 
+    public Alumno getReferenceById(String id) {
+    return alumnoRepository.getReferenceById(id);
+}
 
 
 }

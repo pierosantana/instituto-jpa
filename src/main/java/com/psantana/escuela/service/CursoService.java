@@ -25,11 +25,15 @@ public class CursoService{
     }
 
     public Curso findById(String id){
-        return cursoRepository.findById(id).orElse(null);
+        return cursoRepository.findById(id).orElseThrow(() -> new RuntimeException("Curso no encontrado"));
     }
 
     public void deleteById(String id){
         cursoRepository.deleteById(id);
     }
+
+    public Curso getReferenceById(String id) {
+    return cursoRepository.getReferenceById(id);
+}
 
 }
