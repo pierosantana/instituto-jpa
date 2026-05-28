@@ -4,8 +4,7 @@ import org.springframework.stereotype.Component;
 
 import com.psantana.escuela.dto.MatriculaDTO;
 import com.psantana.escuela.entity.Matricula;
-import com.psantana.escuela.service.AlumnoService;
-import com.psantana.escuela.service.CursoService;
+import com.psantana.escuela.service.EscuelaService;
 
 import lombok.AllArgsConstructor;
 
@@ -13,8 +12,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class MatriculaMapper {
 
-    private final CursoService cursoService;
-    private final AlumnoService alumnoService;
+    private final EscuelaService escuelaService;
 
     public MatriculaDTO toDTO(Matricula matricula) {
         return new MatriculaDTO(
@@ -27,10 +25,10 @@ public class MatriculaMapper {
 
     public Matricula toEntity(MatriculaDTO matriculaDTO) {
         Matricula matricula = new Matricula();
-        matricula.setNombre(matriculaDTO.getNombre());
+        matricula.setNombre(matriculaDTO.nombre());
 
-        matricula.setCurso(cursoService.getReferenceById(matriculaDTO.getCursoId()));
-        matricula.setAlumno(alumnoService.getReferenceById(matriculaDTO.getAlumnoId()));
+        matricula.setCurso(escuelaService.getCursoReferenceById(matriculaDTO.cursoId()));
+        matricula.setAlumno(escuelaService.getAlumnoReferenceById(matriculaDTO.alumnoId()));
 
         return matricula;
     }

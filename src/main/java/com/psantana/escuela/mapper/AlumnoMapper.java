@@ -9,16 +9,13 @@ import com.psantana.escuela.entity.Alumno;
 public class AlumnoMapper {
 
     public AlumnoDTO toDTO(Alumno alumno) {
-        AlumnoDTO alumnoDTO = new AlumnoDTO();
-        alumnoDTO.setId(alumno.getId());
-        alumnoDTO.setNombre(alumno.getNombre());
-        return alumnoDTO;
+        return new AlumnoDTO(alumno.getId(), alumno.getNombre());
     }
 
-	public Alumno toEntity(AlumnoDTO alumnoDTO) {
-		Alumno alumno = new Alumno();
-		alumno.setNombre(alumnoDTO.getNombre());
-		return alumno;
-	}
+    public Alumno toEntity(AlumnoDTO alumnoDTO) {
+        Alumno alumno = new Alumno();
+        alumno.setNombre(alumnoDTO.nombre());
+        return alumno;
+    }
 
 }

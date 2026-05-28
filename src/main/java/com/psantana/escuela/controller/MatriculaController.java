@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.psantana.escuela.dto.MatriculaDTO;
 import com.psantana.escuela.entity.Matricula;
 import com.psantana.escuela.mapper.MatriculaMapper;
-import com.psantana.escuela.service.MatriculaService;
+import com.psantana.escuela.service.EscuelaService;
 
 import lombok.AllArgsConstructor;
 
@@ -23,32 +23,32 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class MatriculaController {
 
-    private final MatriculaService matriculaService;
+    private final EscuelaService escuelaService;
     private final MatriculaMapper matriculaMapper;
     
     @GetMapping
     public List<MatriculaDTO> getMatriculas() {
-        return matriculaService.getAll().stream()
+        return escuelaService.getAllMatriculas().stream()
             .map(matriculaMapper::toDTO)
             .toList();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<MatriculaDTO> getMatricula(@PathVariable("id") String id) {
-        Matricula matricula = matriculaService.findById(id);
+        Matricula matricula = escuelaService.findMatriculaById(id);
         if (matricula == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(matriculaMapper.toDTO(matricula));
     }
 
     @PostMapping
     public ResponseEntity<Void> saveMatricula(@RequestBody MatriculaDTO matriculaDTO) {
-        matriculaService.save(matriculaMapper.toEntity(matriculaDTO));
+        escuelaService.saveMatricula(matriculaMapper.toEntity(matriculaDTO));
         return ResponseEntity.status(201).build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMatricula(@PathVariable("id") String id) {
-        matriculaService.deleteById(id);
+        escuelaService.deleteMatriculaById(id);
         return ResponseEntity.noContent().build();
     }
 

@@ -1,4 +1,7 @@
-http://localhost:8080/alumnos
+http://localhost:8080/alumnos/ALU-1
 
 #######
 GET http://localhost:8080/matriculas
+
+####
+http://localhost:8080/alumnos/ALU-1/matriculas

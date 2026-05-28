@@ -6,9 +6,11 @@ import java.util.Optional;
 import org.springframework.web.bind.annotation.*;
 
 import com.psantana.escuela.dto.AlumnoDTO;
+import com.psantana.escuela.dto.MatriculaDTO;
 import com.psantana.escuela.entity.Alumno;
 import com.psantana.escuela.mapper.AlumnoMapper;
-import com.psantana.escuela.service.AlumnoService;
+import com.psantana.escuela.mapper.MatriculaMapper;
+import com.psantana.escuela.service.EscuelaService;
 
 import lombok.AllArgsConstructor;
 
@@ -17,30 +19,38 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class AlumnoController {
 
-    private final AlumnoService alumnoService;
+    private final EscuelaService escuelaService;
     private final AlumnoMapper alumnoMapper;
+    private final MatriculaMapper matriculaMapper;
 
 
     @GetMapping
     public List<AlumnoDTO> getAlumnos() {
-        return alumnoService.getAll().stream()
+        return escuelaService.getAllAlumnos().stream()
         .map(alumnoMapper::toDTO)
         .toList();
     }
 
     @PostMapping
     public void saveAlumno(@RequestBody AlumnoDTO alumnoDTO) {
-        alumnoService.save(alumnoMapper.toEntity(alumnoDTO));
+        escuelaService.saveAlumno(alumnoMapper.toEntity(alumnoDTO));
+    }
+
+    @GetMapping("/{id}/matriculas")
+    public List<MatriculaDTO> getMatriculasByAlumno(@PathVariable("id") String id) {
+        return escuelaService.getMatriculasByAlumnoId(id).stream()
+            .map(matriculaMapper::toDTO)
+            .toList();
     }
 
     @GetMapping("/{id}")
     public AlumnoDTO getAlumno(@PathVariable("id") String id) {
-        return alumnoMapper.toDTO(alumnoService.findById(id));
+        return alumnoMapper.toDTO(escuelaService.findAlumnoById(id));
     }
 
     @DeleteMapping("/{id}")
     public void deleteAlumno(@PathVariable("id") String id) {
-        alumnoService.deleteById(id);
+        escuelaService.deleteAlumnoById(id);
     }
 
 }
